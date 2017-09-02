@@ -1,32 +1,41 @@
-function TennisGame(){
-  this.reset = ()=>{
+function TennisGame() {
+    const scoreString = ['Love', 'Fifteen', 'Thirty', 'Forthy']
+    this.playerAScore = 0
 
-  }
+    this.reset = () => {
+        this.playerAScore = 0
+    }
 
-  this.echo = ()=>{
+    this.echo = () => {
+       return `${scoreString[this.playerAScore]} - Love`
+    }
 
-    return 'Love - Love'
-
-  }
+    this.playerAGteScore = () => {
+        this.playerAScore++
+    }
 }
 
+test('Echo "Love - Love" when game start', () => {
+    // Arrange
+    let app = new TennisGame()
 
-test('Echo "Love-Love" when press reset button',() =>{
+    // Act
+    app.reset()
+    let result = app.echo()
 
-  //Arrange เตรียมเพื่อทดสอบ
-  let app = new TennisGame()
+    // Assert
+    expect(result).toBe('Love - Love')
+})
 
+test('Echo "Fifteen - Love" when playerA get first score', () => {
+    // Arrange
+    let app = new TennisGame()
+    app.reset()
+    app.playerAGteScore()
+    
+    // Act
+    let result = app.echo()
 
-  //Act
-  app.reset()
-  let result = app.echo()
-
-
-
-
-
-
-  //Assert คาดหวัง
-  expect(result).toBe('Love - Love')
-
+    // Assert
+    expect(result).toBe('Fifteen - Love')
 })
